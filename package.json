@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "build": "next build",
-    "export": "next export"
+    "export": "next export",
     "deploy": "firebase deploy --only hosting"
   },
   "author": "Your Name",
