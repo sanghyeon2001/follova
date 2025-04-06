@@ -10,13 +10,15 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v4  # GitHub 리포지토리에서 코드를 가져옵니다.
 
+      # 'npm run build'와 'npm run export' 명령어를 프로젝트 루트 디렉토리에서 실행하도록 설정
       - run: npm run build && npm run export
+        working-directory: ./  # 루트 디렉토리에서 실행
 
-      - uses: FirebaseExtended/action-hosting-deploy@v0
+      - uses: FirebaseExtended/action-hosting-deploy@v0  # Firebase 배포를 위한 GitHub Action
         with:
           repoToken: "${{ secrets.GITHUB_TOKEN }}"
           firebaseServiceAccount: "${{ secrets.FIREBASE_SERVICE_ACCOUNT_FOLLOVA }}"
-          channelId: live
-          projectId: follova
+          channelId: live  # 배포 채널
+          projectId: follova  # Firebase 프로젝트 ID
