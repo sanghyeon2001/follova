@@ -26,7 +26,7 @@ jobs:
 
     - name: Build and export
       run: npm run build && npm run export
-      working-directory: ./
+      working-directory: ./Documents/follova
       
     - name: Deploy to Firebase
       run: npm run deploy
