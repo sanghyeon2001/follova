@@ -6,20 +6,27 @@ on:
       - main
 
 jobs:
-  build_and_deploy:
+  build:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v4  # GitHub 리포지토리에서 코드를 가져옵니다.
+    - name: Checkout repository
+      uses: actions/checkout@v2
 
-      # 'npm run build'와 'npm run export' 명령어를 프로젝트 루트 디렉토리에서 실행하도록 설정
-      - run: npm run build && npm run export
-        # Update or remove the following line based on the correct directory
-        working-directory: ./Documents/follova  # Ensure this path exists
+    - name: Set up Node.js
+      uses: actions/setup-node@v2
+      with:
+        node-version: '14'
 
-      - uses: FirebaseExtended/action-hosting-deploy@v0  # Firebase 배포를 위한 GitHub Action
-        with:
-          repoToken: "${{ secrets.GITHUB_TOKEN }}"
-          firebaseServiceAccount: "${{ secrets.FIREBASE_SERVICE_ACCOUNT_FOLLOVA }}"
-          channelId: live  # 배포 채널
-          projectId: follova  # Firebase 프로젝트 ID
+    - name: Install dependencies
+      run: npm install
+
+    - name: Create missing directory
+      run: mkdir -p ./Documents/follova
+
+    - name: Build and export
+      run: npm run build && npm run export
+      working-directory: ./
+      
+    - name: Deploy to Firebase
+      run: npm run deploy
