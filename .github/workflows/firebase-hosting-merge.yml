@@ -14,7 +14,7 @@ jobs:
 
       # 'npm run build'와 'npm run export' 명령어를 프로젝트 루트 디렉토리에서 실행하도록 설정
       - run: npm run build && npm run export
-        working-directory: ./  # 루트 디렉토리에서 실행
+        working-directory: ./Documents/follova  # Documents/follova 폴더에서 실행하도록 수정
 
       - uses: FirebaseExtended/action-hosting-deploy@v0  # Firebase 배포를 위한 GitHub Action
         with:
